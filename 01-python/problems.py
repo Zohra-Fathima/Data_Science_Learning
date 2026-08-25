@@ -21,32 +21,40 @@
 
 # print(new)
 
-import json
-data={
-    "bengalure":1000,
-    "pune":5000,
-    "mumbai":9000,
+# import json
+# data={
+#     "bengalure":1000,
+#     "pune":5000,
+#     "mumbai":9000,
     
-}
+# }
 
-with open("cities.json","w")as f:
-    json.dump(data,f,indent=5)
+# with open("cities.json","w")as f:
+#     json.dump(data,f,indent=5)
 
-with open("cities.json","r")as f:
-    json.load(f)
-
-
-for city in data:
-    print(city,data[city])
-    
-city = input("Enter city: ")
-population = int(input("Enter population: "))
-
-data[city]=population
-
-with open("cities.json","w")as f:
-    json.dump(data,f)
+# with open("cities.json","r")as f:
+#     json.load(f)
 
 
-for city in data:
-    print(city,data[city])
+# for city in data:
+#     print(city,data[city])
+
+# city = input("Enter city: ")
+# population = int(input("Enter population: "))
+
+# data[city]=population
+
+# with open("cities.json","w")as f:
+#     json.dump(data,f)
+
+
+# for city in data:
+#     print(city,data[city])
+
+try:
+    with open("data.txt","r")as f:
+        print(f.read())
+
+except(FileNotFoundError):
+    print("Error:file does not exists.")
+
