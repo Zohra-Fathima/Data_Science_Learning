@@ -101,3 +101,4 @@ with open("data.json","w") as f:
     print(type(data),data)
 
 
+
