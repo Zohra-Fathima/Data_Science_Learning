@@ -185,4 +185,10 @@ CHANGE COLUMN salary ctc INT;
 UPDATE teacher
 SET ctc = ctc + ctc * 0.25;
 
+ALTER TABLE teacher 
+ADD COLUMN city VARCHAR(10) DEFAULT("GURGAON");
+
 SELECT * FROM teacher;
+
+ALTER TABLE teacher 
+DROP COLUMN ctc;
