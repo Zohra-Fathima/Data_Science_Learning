@@ -38,6 +38,7 @@ VALUES
 (3,20,"shreya","shreya@gmail.com",222,122),
 (4,21,"moo","moo@gmail.com",333,344);
 
+
 -- update :-
 UPDATE user
 SET age =21
@@ -110,7 +111,35 @@ HAVING max(followers) > 200;
 -- where clause is for the table, having is for a group
 -- grouping is necessary for having
 
+-- Alter:-
+-- add column
+ALTER TABLE user
+ADD COLUMN city VARCHAR(10) DEFAULT "delhi";
 
+-- drop column:-
+ALTER TABLE user
+DROP COLUMN city;
+
+-- rename table
+ALTER TABLE user
+RENAME TO insta_user;
+
+-- change column (rename):
+ALTER TABLE user
+CHANGE COLUMN followers subs INT DEFAULT 0;
+
+-- modify column(modify the datatype/constraint):
+-- syntax:
+-- alter table table_name
+-- modify col_name new_datatype new_constraint;
+
+
+-- truncate(to delete tables data)
+TRUNCATE TABLE user;
+
+DROP TABLE posts;
+
+SELECT * FROM user;
 
 CREATE TABLE posts(
 	id INT PRIMARY KEY,
@@ -125,3 +154,35 @@ VALUES
 (101,"zohra",1);
 
 SELECT id,user_id FROM posts;
+
+
+-- practice questions:
+CREATE DATABASE IF NOT EXISTS annes;
+
+USE annes;
+
+CREATE TABLE teacher (
+	id INT,
+    name VARCHAR(20),
+    subject VARCHAR(25),
+    salary INT
+);
+
+INSERT INTO teacher
+VALUES
+(23,"ajay","math",5000),
+(47,"bharat","english",6000),
+(18,"chetan","chemistry",45000),
+(9,"divya","physics",75000);
+
+SELECT * from teacher
+WHERE salary > 55000;
+
+ALTER TABLE teacher
+
+CHANGE COLUMN salary ctc INT;
+
+UPDATE teacher
+SET ctc = ctc + ctc * 0.25;
+
+SELECT * FROM teacher;
