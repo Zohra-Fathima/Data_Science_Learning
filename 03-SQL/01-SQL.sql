@@ -192,3 +192,48 @@ SELECT * FROM teacher;
 
 ALTER TABLE teacher 
 DROP COLUMN ctc;
+
+CREATE TABLE student (
+	roll_no INT,
+    name VARCHAR(20),
+    city VARCHAR(10),
+    marks INT
+);
+
+INSERT INTO student
+VALUES
+(110,"adam","delhi",76),
+(108,"bob","mumbai",65),
+(124,"casey","pune",94),
+(112,"duke","pune",80);
+
+SELECT * FROM student;
+
+SELECT * FROM student 
+WHERE marks > 75;
+
+SELECT DISTINCT city FROM student;
+
+SELECT city, max(marks)
+FROM student 
+GROUP BY city;
+
+SELECT avg(marks)
+FROM student;
+
+ALTER TABLE student
+ADD COLUMN grade VARCHAR(2);
+
+UPDATE student
+SET grade="O"
+WHERE marks >= 80;
+
+UPDATE student
+SET grade="A"
+WHERE marks >= 70 AND marks <80;
+
+UPDATE student
+SET grade="B"
+WHERE marks >= 60 AND marks <70;
+SELECT * FROM student;
+
