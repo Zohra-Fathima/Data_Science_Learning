@@ -117,12 +117,36 @@ RIGHT JOIN orders as B
 ON A.customer_id = B.customer_id
 WHERE A.customer_id IS NULL; 
 
+SELECT * FROM customers;
+SELECT * FROM orders;
 
+-- sub queries:-
+SELECT * FROM orders
+WHERE amount > (
+	SELECT AVG(amount)
+    FROM orders
+);
 
+-- sub queries inside(with) SELECT:
+SELECT name,
+	(
+		SELECT COUNT(*)
+		FROM orders o
+		WHERE o.customer_id= c.customer_id
+	)
+    AS order_count
+	FROM customers c;
 
-
-
-
-
-
+-- sub queries inside(with) FROM:
+SELECT
+ summary.customer_id,
+ summary.avg_amount
+FROM 
+	(
+		SELECT
+			customer_id,
+			AVG(amount) as avg_amount
+		FROM orders
+		GROUP BY customer_id
+	) AS summary;
 
