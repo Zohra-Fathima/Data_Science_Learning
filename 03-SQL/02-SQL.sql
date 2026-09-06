@@ -186,9 +186,11 @@ SELECT * FROM accounts;
 CREATE INDEX idx_branch ON accounts(branch); 
 SHOW INDEX FROM accounts; -- to see index
 
+-- multi column indexing
 CREATE INDEX idx2 ON accounts(branch,balance); 
 
 --  stored procedures:-CREATE INDEX idx_branch ON accounts(branch); 
+
 -- creating a procedure:-
 DELIMITER $$
 CREATE PROCEDURE check_balance(IN acc_id INT)
@@ -201,3 +203,18 @@ END $$
 DELIMITER ;
 
 CALL check_balance(1);  -- calling our prodecure
+
+-- example 2(with out):
+DELIMITER $$
+CREATE PROCEDURE check_balance(IN acc_id INT, OUT bal DECIMAL(10,2))
+BEGIN
+	SELECT balance INTO bal
+    FROM accounts
+    WHERE account_id=acc_id;
+END $$
+
+DELIMITER ;
+
+CALL check_balance(1,@balance); 
+SELECT @balance;
+
