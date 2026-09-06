@@ -103,14 +103,14 @@ FROM customers as A
 JOIN customers as B
 on A.customer_id= B.customer_id;
 
--- LEFT EXCLUSIVE JOIN:
+-- LEFT EXCLUSIVE JOIN:(we want that data of A which is not common with B)
 SELECT * 
 FROM customers as A
 LEFT JOIN orders as B
 ON A.customer_id = B.customer_id
 WHERE B.customer_id IS NULL;
 
--- RIGHT EXCLUSIVE JOIN:
+-- RIGHT EXCLUSIVE JOIN:(we want that data of B which is not common with A)
 SELECT * 
 FROM customers as A
 RIGHT JOIN orders as B
@@ -150,3 +150,54 @@ FROM
 		GROUP BY customer_id
 	) AS summary;
 
+#VIEW:-
+CREATE VIEW view1 AS
+SELECT customer_id, name FROM customers;
+
+SELECT * FROM view1 WHERE name = "bob";
+
+CREATE VIEW view2 AS
+SELECT c.customer_id,c.name,o.order_id
+FROM customers c
+INNER JOIN orders o
+ON c.customer_id = o.customer_id;
+
+SELECT * FROM view2;
+
+
+-- INDEX:-
+CREATE TABLE accounts(
+	account_id INT PRIMARY KEY,
+    name VARCHAR(10),
+    balance DECIMAL(10,2),
+    branch VARCHAR(20)
+);
+
+INSERT INTO accounts
+ VALUES
+(1,"adam",500.0,"mumbai"),
+(2,"bob",300.00,"delhi"),
+(3,"charlie",700.00,"bangalore"),
+(4,"david",1000.00,"noida");
+
+SELECT * FROM accounts;
+
+-- single column indexing
+CREATE INDEX idx_branch ON accounts(branch); 
+SHOW INDEX FROM accounts; -- to see index
+
+CREATE INDEX idx2 ON accounts(branch,balance); 
+
+--  stored procedures:-CREATE INDEX idx_branch ON accounts(branch); 
+-- creating a procedure:-
+DELIMITER $$
+CREATE PROCEDURE check_balance(IN acc_id INT)
+BEGIN
+	SELECT balance
+    FROM accounts
+    WHERE account_id=acc_id;
+END $$
+
+DELIMITER ;
+
+CALL check_balance(1);  -- calling our prodecure
